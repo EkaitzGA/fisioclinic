@@ -3,9 +3,9 @@ import sequelize from "../config/sequelize.js";
 
 
 
-const worker = sequelize.define("worker", {
+const worker = sequelize.define("workers", {
     worker_id: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true

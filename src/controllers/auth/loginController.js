@@ -1,4 +1,4 @@
-import error from "../../helpers/errors.js";
+/* import error from "../../helpers/errors.js";
 import { verifyPassword } from "../../config/bcrypt.js";
 import adminController from "../admin/adminController.js";
 
@@ -19,4 +19,4 @@ async function login(email,password){
 export const functions ={
     login
 }
-export default functions
+export default functions */

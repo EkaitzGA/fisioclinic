@@ -1,7 +1,10 @@
 import { Router } from "express";
 import loginRouter from "./loginRouter.js";
-import adminRouter from "./adminRouter.js";
-import { isAuthenticated } from "../middlewares/authMiddleware.js";
+import workerRouter from "./workerRouter.js";
+import patientRouter from "./patientRouter.js";
+import treatmentRouter from "./treatmentRouter.js";
+import sessionRouter from "./sessionRouter.js";
+/* import { isAuthenticated } from "../middlewares/authMiddleware.js"; */
 
 const router = Router();
 
@@ -11,6 +14,12 @@ router.get('/', (req, res) => {
 
 router.use("/login", loginRouter)
 
-router.use("/admin", isAuthenticated, adminRouter)
+router.use("/workers", workerRouter)
+
+router.use("/patients", patientRouter)
+
+router.use("/treatments", treatmentRouter)
+
+router.use("/sessions", sessionRouter)
 
 export default router;

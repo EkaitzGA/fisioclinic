@@ -1,1 +1,0 @@
-import adminController from "../controllers/admin/adminController.js";

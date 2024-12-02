@@ -1,4 +1,4 @@
-import loginController from "./loginController.js";
+/* import loginController from "./loginController.js";
 
 
 function loginForm(req, res) {
@@ -41,4 +41,4 @@ export const functions = {
 }
 export default functions
 
-//REVISAR TODO, ESTÁ COPIADO DE MACHIMBA
+//REVISAR TODO, ESTÁ COPIADO DE MACHIMBA */
