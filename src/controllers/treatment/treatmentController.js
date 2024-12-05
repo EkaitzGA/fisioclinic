@@ -11,9 +11,6 @@ async function getAllTreatments() {
 }
 
 async function createTreatment(treatmentData) {
-    if (treatmentData === null || treatmentData === undefined) {
-        throw new error.INVALID_ID();
-    }
     const treatment = await treatmentModel.create(treatmentData);
     if (!treatment) {
         throw new error.CREATE_DOESNT_WORK();
@@ -35,15 +32,11 @@ async function updateTreatment(treatment_id, name, price) {
 }
 
 async function deleteTreatment(treatment_id) {
-    if (treatment_id === null || treatment_id === undefined) {
-        throw new error.INVALID_ID();
-    }
-    const treatment = await treatmentModel.destroy({
-        where: { treatment_id }
-    });
-    if (treatment === 0) {
+    const treatment = await treatmentModel.findByPk(treatment_id)
+    if (!treatment) {
         throw new error.TREATMENT_NOT_FOUND();
     }
+    await treatmentModel.destroy({ where: { treatment_id } });
     return treatment;
 }
 export const functions = {

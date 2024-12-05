@@ -65,6 +65,50 @@ INSERT INTO patients (first_name, last_name, phone, medical_history, email) VALU
 ('José', 'Montero', '615739482', 'Dorsalgia crónica. Postura encorvada. Dolor al estar mucho tiempo sentado.', 'jose.montero@example.com'),
 ('Verónica', 'Arroyo', '629385417', 'Bronquiectasias. Dificultad respiratoria. Tos con flema.', 'veronica.arroyo@example.com');
 
+INSERT INTO sessions (treatment_id, patient_id, schedule_id, worker_id, date, status, reason) VALUES
+(1, 1, 1, 1, '2024-11-02', 'Cerrada', 'Dolor en zona lumbar'),
+(2, 2, 2, 2, '2024-11-02', 'Cerrada', 'Dolor cervical persistente'),
+(3, 3, 3, 1, '2024-11-03', 'Cerrada', 'Dificultad respiratoria'),
+(4, 4, 4, 2, '2024-11-03', 'Cerrada', 'Control postparto'),
+(1, 5, 5, 1, '2024-11-04', 'Cerrada', 'Rehabilitación hombro'),
+(2, 6, 6, 2, '2024-11-04', 'Cerrada', 'Evaluación escoliosis'),
+(3, 7, 7, 1, '2024-11-05', 'Cerrada', 'Control respiratorio'),
+(4, 8, 8, 2, '2024-11-05', 'Cerrada', 'Revisión suelo pélvico'),
+(1, 9, 1, 1, '2024-11-06', 'Cerrada', 'Dolor lumbar crónico'),
+(2, 10, 2, 2, '2024-11-06', 'Cerrada', 'Control postoperatorio'),
+(1, 11, 3, 1, '2024-11-25', 'Cerrada', 'Rehabilitación rodilla'),
+(2, 12, 4, 2, '2024-11-25', 'Cerrada', 'Dolor cervical agudo'),
+(3, 13, 5, 1, '2024-11-26', 'Cerrada', 'Control respiratorio'),
+(4, 14, 6, 2, '2024-11-26', 'Cerrada', 'Evaluación pélvica'),
+(1, 15, 7, 1, '2024-11-27', 'Cerrada', 'Rehabilitación cadera'),
+(2, 16, 8, 2, '2024-11-27', 'Cerrada', 'Control neurológico'),
+(3, 17, 1, 1, '2024-11-28', 'Cerrada', 'Terapia respiratoria'),
+(4, 18, 2, 2, '2024-11-28', 'Cerrada', 'Revisión postparto'),
+(1, 19, 3, 1, '2024-11-29', 'Cerrada', 'Control lumbar'),
+(2, 20, 4, 2, '2024-11-29', 'Cerrada', 'Terapia cervical');
+
+
+INSERT INTO sessions (treatment_id, patient_id, schedule_id, worker_id, date, status, reason) VALUES
+(1, 21, 5, 1, '2024-12-03', 'Pendiente', 'Primera evaluación lumbar'),
+(2, 22, 6, 2, '2024-12-03', 'Pendiente', 'Control cervical'),
+(3, 23, 7, 1, '2024-12-04', 'Pendiente', 'Terapia respiratoria'),
+(4, 24, 8, 2, '2024-12-04', 'Pendiente', 'Evaluación ginecológica'),
+(1, 25, 1, 1, '2024-12-05', 'Pendiente', 'Rehabilitación espalda'),
+(2, 26, 2, 2, '2024-12-05', 'Pendiente', 'Control neurológico'),
+(3, 27, 3, 1, '2024-12-06', 'Pendiente', 'Sesión respiratoria'),
+(4, 28, 4, 2, '2024-12-06', 'Pendiente', 'Revisión postparto'),
+(1, 29, 5, 1, '2024-12-09', 'Pendiente', 'Evaluación traumatológica'),
+(2, 30, 6, 2, '2024-12-09', 'Pendiente', 'Control neurológico'),
+(3, 31, 7, 1, '2024-12-10', 'Pendiente', 'Terapia respiratoria'),
+(4, 32, 8, 2, '2024-12-10', 'Pendiente', 'Control ginecológico'),
+(1, 33, 1, 1, '2024-12-11', 'Pendiente', 'Rehabilitación trauma'),
+(2, 34, 2, 2, '2024-12-11', 'Pendiente', 'Evaluación neurológica'),
+(3, 35, 3, 1, '2024-12-12', 'Pendiente', 'Control respiratorio'),
+(4, 36, 4, 2, '2024-12-12', 'Pendiente', 'Revisión ginecológica'),
+(1, 37, 5, 1, '2024-12-13', 'Pendiente', 'Primera evaluación'),
+(2, 38, 6, 2, '2024-12-13', 'Pendiente', 'Control neurológico'),
+(3, 39, 7, 1, '2024-12-16', 'Pendiente', 'Terapia respiratoria'),
+(4, 40, 8, 2, '2024-12-16', 'Pendiente', 'Control ginecológico');
 
 
 

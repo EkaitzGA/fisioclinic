@@ -2,6 +2,7 @@ import express from 'express'; // framework para crear el servidor
 import router from './routes/router.js';// importar rutas
 import session from "express-session";
 import dotenv from 'dotenv'; 
+import db from './config/mongoose.js';
 
 dotenv.config();
 

@@ -5,6 +5,10 @@ const router = Router()
 
 router.get("/",sessionApiController.getAllSessions)
 
+router.get("/date/:startDate/:endDate",sessionApiController.getSessionsByDateRange)
+
+router.get("/:id",sessionApiController.getSessionById)
+
 router.get("/patient/:id",sessionApiController.getSessionByPatientId)
 
 router.get("/treatment/:id",sessionApiController.getSessionByTreatmentId)

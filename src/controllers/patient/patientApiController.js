@@ -22,8 +22,8 @@ async function getPatientByEmail(req, res) {
 }   
 
 async function getPatientById(req, res) {
-    try{const { patient_id } = req.params;
-    const newPatient = await patientController.getPatientById(patient_id);
+    try{const { id } = req.params;
+    const newPatient = await patientController.getPatientById(id);
     res.json(newPatient);
 }catch(error){
     console.error(error);

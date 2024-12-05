@@ -5,7 +5,9 @@ const router = Router()
 
 router.get("/",workerApiController.getAllWorkers)
 
-router.get("/:email",workerApiController.getWorkerByEmail)
+router.get("/email/:email",workerApiController.getWorkerByEmail)
+
+router.get("/:id",workerApiController.getWorkerById)
 
 router.post("/create",workerApiController.createWorker)
 

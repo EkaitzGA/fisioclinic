@@ -9,9 +9,29 @@ async function getAllSessions(req, res) {
     }
 }
 
+async function getSessionsByDateRange(req, res) {
+    try{const { startDate, endDate } = req.params;
+    const sessions = await sessionController.getSessionsByDateRange(startDate, endDate);
+    res.json(sessions);
+}catch(error){
+    console.error(error);
+    res.status(error.status).json({message: error.message});
+}
+}
+
+async function getSessionById(req, res) {
+    try{const { id } = req.params;
+    const session = await sessionController.getSessionById(id);
+    res.json(session);
+}catch(error){
+    console.error(error);
+    res.status(error.status).json({message: error.message});
+}
+}
+
 async function getSessionByPatientId(req, res) {
-    try{const { patient_id } = req.params;
-    const session = await sessionController.getSessionByPatientId(patient_id);
+    try{const { id } = req.params;
+    const session = await sessionController.getSessionByPatientId(id);
     res.json(session);
 }catch(error){
     console.error(error);
@@ -20,8 +40,8 @@ async function getSessionByPatientId(req, res) {
 }
 
 async function getSessionByTreatmentId(req, res) {
-    try{const { treatment_id } = req.params;
-    const session = await sessionController.getSessionByTreatmentId(treatment_id);
+    try{const { id } = req.params;
+    const session = await sessionController.getSessionByTreatmentId(id);
     res.json(session);
 }catch(error){
     console.error(error);
@@ -30,8 +50,8 @@ async function getSessionByTreatmentId(req, res) {
 }
 
 async function getSessionByWorkerId(req, res) {
-    try{const { worker_id } = req.params;
-    const session = await sessionController.getSessionByWorkerId(worker_id);
+    try{const { id } = req.params;
+    const session = await sessionController.getSessionByWorkerId(id);
     res.json(session);
 }catch(error){
     console.error(error);
@@ -90,6 +110,8 @@ async function deleteSession(req, res) {
 
 export const functions = {
     getAllSessions,
+    getSessionById,
+    getSessionsByDateRange,
     getSessionByPatientId,
     getSessionByTreatmentId,
     getSessionByWorkerId,

@@ -16,6 +16,16 @@ async function getWorkerByEmail(email) {
 
     return worker;
 }
+async function getWorkerById(worker_id) {
+    if (worker_id === null || worker_id === undefined) {
+        throw new error.INVALID_ID();
+    }
+    const worker = await workerModel.findByPk(worker_id);
+    if (!worker) {
+        throw new error.WORKER_NOT_FOUND();
+    }
+    return worker;
+}
 
 async function getAllWorkers() {
         const workers = await workerModel.findAll();
@@ -61,6 +71,7 @@ async function deleteWorker(worker_id) {
 }
 export const functions = {
     getWorkerByEmail,
+    getWorkerById,
     getAllWorkers,
     createWorker,
     updateWorker,

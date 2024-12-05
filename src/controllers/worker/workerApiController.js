@@ -20,6 +20,16 @@ async function getWorkerByEmail(req, res) {
 }
 }
 
+async function getWorkerById(req, res) {
+    try{const { id } = req.params;
+    const newWorker = await workerController.getWorkerById(id);
+    res.json(newWorker);
+}catch(error){
+    console.error(error);
+    res.status(error.status).json({message: error.message});
+}
+}
+
 async function createWorker(req, res) {
     try{const workerData = {
         first_name: req.body.first_name,
@@ -58,6 +68,7 @@ async function deleteWorker(req, res) {
 export const functions = {
     getAllWorkers,
     getWorkerByEmail,
+    getWorkerById,
     createWorker,
     updateWorker,
     deleteWorker

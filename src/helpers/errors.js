@@ -17,6 +17,13 @@ class INVALID_DATA extends Error {
         this.status=400;
     }
 }
+
+class INVALID_DATE extends Error {
+    constructor(){
+        super("Fecha inválida");
+        this.status=400;
+    }
+}
 class PATIENT_NOT_FOUND extends Error {
     constructor(){
         super("Paciente no encontrado");
@@ -27,6 +34,12 @@ class TREATMENT_NOT_FOUND extends Error {
     constructor(){
         super("Tratamiento no encontrado");
         this.status=404;
+    }
+}
+class INCORRECT_STATUS extends Error {
+    constructor(){
+        super("Status inexistente");
+        this.status=400;
     }
 }
 class INVALID_ID extends Error {
@@ -104,6 +117,13 @@ class CREATE_DOESNT_WORK extends Error {
     }
 }
 
+class BLOCK_UPDATE_SESSION extends Error {
+    constructor(){
+        super("No se puede actualizar una sesión cerrada");
+        this.status=400;
+    }
+}
+
 class EMAIL_NOT_FOUND extends Error {
     constructor(){
         super("Email no encontrado");
@@ -135,6 +155,9 @@ export const errors ={
     INVALID_ID,
     INVALID_EMAIL,
     INVALID_DATA,
+    INVALID_DATE,
+    INCORRECT_STATUS,
+    BLOCK_UPDATE_SESSION,
     /* PASSWORDS_DONT_MATCH,
     ORDER_ALREADY_OPEN,
     ORDER_DOESNT_EXIST,

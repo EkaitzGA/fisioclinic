@@ -1,18 +1,88 @@
 import sessionModel from "../../models/sessionModel.js";
+import treatmentModel from "../../models/treatmentModel.js";
+import patientModel from "../../models/patientModel.js";
+import workerModel from "../../models/workerModel.js";
+import scheduleModel from "../../models/scheduleModel.js";
+import historyModel from "../../models/historyModel.js";
 import error from "../../helpers/errors.js";
+import { EmptyResultError, Op } from "sequelize";
 
+const includeOptions = [
+    {
+        model: treatmentModel,
+        attributes: ['name']
+    },
+    {
+        model: patientModel,
+        attributes: ['first_name', 'last_name']
+    },
+    {
+        model: scheduleModel,
+        attributes: ['hours']
+    },
+    {
+        model: workerModel,
+        attributes: ['first_name', 'last_name']
+    }
+];
 async function getAllSessions() {
-        const sessions = await sessionModel.findAll();
+        const sessions = await sessionModel.findAll({
+            include: includeOptions,
+            order:[
+                ['date', 'DESC'],
+                [scheduleModel, 'hours', 'ASC']
+            ]
+        });
+     
         if (!sessions) {
             throw new error.SESSION_NOT_FOUND();
         }
         return sessions;
  
 }
+async function getSessionsByDateRange(startDate, endDate) {
+    if (startDate === null || startDate === undefined || endDate === null || endDate === undefined) {
+        throw new error.INVALID_DATE();
+    }
+    const sessions = await sessionModel.findAll({
+        attributes: ['date', 'status', 'reason'],
+        where: { date: { [Op.between]: [startDate, endDate] } },
+        include: includeOptions,
+        order: [
+            ['date', 'ASC'],
+            [scheduleModel, 'hours', 'ASC']
+        ]
+    });
+    if (!sessions) {
+        throw new error.SESSION_NOT_FOUND();
+    }
+    return sessions;        
+}
+
+
+
+
+async function getSessionById(session_id) {
+        const session = await sessionModel.findByPk(session_id, {
+            attributes: ['date', 'status', 'reason'],
+            include: includeOptions
+        });
+        if (!session) {
+            throw new error.SESSION_NOT_FOUND();
+        }
+        return session;
+  
+}
 
 async function getSessionByPatientId(patient_id) {
         const session = await sessionModel.findAll({
-            where: { patient_id }
+            attributes: ['date', 'status', 'reason'],
+            where: { patient_id },
+            include: includeOptions,
+        order: [
+            ['date', 'DESC'],
+            [scheduleModel, 'hours', 'ASC']
+        ]
         });
         if (!session) {
             throw new error.SESSION_NOT_FOUND();
@@ -25,7 +95,13 @@ async function getSessionByTreatmentId(treatment_id) {
         throw new error.INVALID_ID();
     }
     const session = await sessionModel.findAll({
-        where: { treatment_id }
+        attributes: ['date', 'status', 'reason'],
+        where: { treatment_id },
+        include: includeOptions,
+        order: [
+            ['date', 'DESC'],
+            [scheduleModel, 'hours', 'ASC']
+        ]
     });
     if (!session) {
         throw new error.SESSION_NOT_FOUND();
@@ -37,7 +113,13 @@ async function getSessionByWorkerId(worker_id) {
         throw new error.INVALID_ID();
     }
     const session = await sessionModel.findAll({
-        where: { worker_id }
+        attributes: ['date', 'status', 'reason'],
+        where: { worker_id },
+        include: includeOptions,
+        order: [
+            ['date', 'DESC'],
+            [scheduleModel, 'hours', 'ASC']
+        ]
     })
     if (!session) {
         throw new error.SESSION_NOT_FOUND();
@@ -46,9 +128,19 @@ async function getSessionByWorkerId(worker_id) {
 }
 
 async function getSessionByStatus(status) {
+    const orderDirection = status === "Pendiente" ? "ASC" : "DESC";
     const session = await sessionModel.findAll({
-        where: { status }
+        attributes: ['date', 'status', 'reason'],
+        where: { status },
+        include: includeOptions,
+        order: [
+            ['date', orderDirection],
+            [scheduleModel, 'hours', orderDirection]
+        ]
     });
+    if(status !== "Pendiente" && status !== "Cerrada"){
+        throw new error.INCORRECT_STATUS()
+    }
     if (!session) {
         throw new error.SESSION_NOT_FOUND();
     }
@@ -56,18 +148,29 @@ async function getSessionByStatus(status) {
 }
 
 async function createSession(sessionData){
-    const session = await sessionModel.create(sessionData);
+    const session = await sessionModel.create(sessionData,);
     if(!session){
         throw new error.CREATE_DOESNT_WORK();
     }
-    return session; 
-}
+    const sessionWithRelations = await sessionModel.findByPk(session.session_id, {
+        attributes: ['date', 'status', 'reason'],
+        include: includeOptions,
+    });
+    return sessionWithRelations;
+    }
 
 async function updateSession(session_id, treatment_id, patient_id, schedule_id, worker_id,date, status, reason) {
-    const session = await sessionModel.findByPk(session_id);
+    const session = await sessionModel.findByPk(session_id,{
+        attributes: ['date', 'status', 'reason'],
+        include: includeOptions,
+});
     if (!session) {
         throw new error.SESSION_NOT_FOUND();
     }
+    if (session.status === "Cerrada") {
+        throw new error.BLOCK_UPDATE_SESSION()
+    }
+    session.session_id = session_id;
     session.treatment_id = treatment_id;
     session.patient_id = patient_id;
     session.schedule_id = schedule_id;
@@ -76,6 +179,34 @@ async function updateSession(session_id, treatment_id, patient_id, schedule_id, 
     session.status = status;
     session.reason = reason;
     await session.save();
+
+    if(session.status === "Cerrada"){
+        const updatedSession = await sessionModel.findByPk(session_id, {
+            attributes: ['date', 'status', 'reason'],
+            include: includeOptions,
+        });
+        const historyEntry = {
+            date: date,
+            reason: reason,
+            treatment:{
+                name: updatedSession.treatment.name,
+                price: updatedSession.treatment.price
+            },
+            patient: {
+                first_name: updatedSession.patient.first_name,
+                last_name: updatedSession.patient.last_name
+            },
+            worker: {
+                first_name: updatedSession.worker.first_name,
+                last_name: updatedSession.worker.last_name
+            },
+            schedule: {
+                hours: updatedSession.schedule.hours
+            }
+
+        }
+        await historyModel.create(historyEntry);
+    }
     return session;
 }
 
@@ -90,6 +221,8 @@ async function deleteSession(session_id) {
 
 export const functions = {
     getAllSessions,
+    getSessionById,
+    getSessionsByDateRange,
     getSessionByPatientId,
     getSessionByTreatmentId,
     getSessionByWorkerId,

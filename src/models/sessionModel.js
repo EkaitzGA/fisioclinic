@@ -1,8 +1,9 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/sequelize.js";
-/* import treatment from "./treatmentsModel.js";
-import patient from "./patientModel.js";
-import worker from "./workerModel.js"; */
+import treatmentModel from "./treatmentModel.js";
+import patientModel from "./patientModel.js";
+import scheduleModel from "./scheduleModel.js";
+import workerModel from "./workerModel.js";
 
 
 
@@ -35,6 +36,7 @@ const session = sequelize.define("sessions", {
     },
     status: {
         type: DataTypes.ENUM("Pendiente", "Cerrada"),
+        defaultValue: "Pendiente",
         allowNull: false,
     },
     reason: {
@@ -44,3 +46,12 @@ const session = sequelize.define("sessions", {
 })
 
 export default session;
+
+session.belongsTo(treatmentModel, { foreignKey: "treatment_id" });
+session.belongsTo(patientModel, { foreignKey: "patient_id" });
+session.belongsTo(scheduleModel, { foreignKey: "schedule_id" });
+session.belongsTo(workerModel, { foreignKey: "worker_id" });
+treatmentModel.hasMany(session, { foreignKey: "treatment_id" });
+patientModel.hasMany(session, { foreignKey: "patient_id" });
+scheduleModel.hasMany(session, { foreignKey: "schedule_id" });
+workerModel.hasMany(session, { foreignKey: "worker_id" });

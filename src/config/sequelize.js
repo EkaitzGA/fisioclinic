@@ -19,15 +19,28 @@ const sequelize = new Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
     },
 })
 
-async function testConnection() {
-    try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
+async function testConnection(retries = 5, delay = 5000) {
+    while (retries > 0) {
+        try {
+            await sequelize.authenticate();
+            console.log('Connection has been established successfully.');
+            return; // Salir de la función si la conexión es exitosa
+        } catch (error) {
+            console.error(`Unable to connect to the database. Retries left: ${retries - 1}`, error);
+            retries -= 1;
+
+            if (retries === 0) {
+                console.error('All retries exhausted. Could not connect to the database.');
+                process.exit(1); // Salir del proceso si no se puede conectar
+            }
+
+            // Esperar antes de volver a intentar
+            await new Promise(res => setTimeout(res, delay));
+        }
     }
 }
 
 testConnection();
+
 
 export default sequelize;

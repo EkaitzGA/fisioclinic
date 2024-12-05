@@ -12,6 +12,7 @@ async function getAllPatients() {
 
 
 async function getPatientByEmail(email) {
+    console.log(email, "email");
         const patient = await patientModel.findOne({
             where: { email }
         });

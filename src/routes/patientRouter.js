@@ -7,7 +7,7 @@ router.get("/",patientApiController.getAllPatients)
 
 router.get("/:id",patientApiController.getPatientById)
 
-router.get("/:email",patientApiController.getPatientByEmail)
+router.get("/email/:email",patientApiController.getPatientByEmail)
 
 router.post("/create",patientApiController.createPatient)
 
