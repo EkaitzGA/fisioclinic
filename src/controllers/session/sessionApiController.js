@@ -19,6 +19,16 @@ async function getSessionsByDateRange(req, res) {
 }
 }
 
+async function getAvailableSessions(req, res) {
+    try{const { startDate, endDate } = req.params;
+    const sessions = await sessionController.getAvailableSessions(startDate, endDate);
+    res.json(sessions);
+}catch(error){
+    console.error(error);
+    res.status(error.status).json({message: error.message});
+}
+}
+
 async function getSessionById(req, res) {
     try{const { id } = req.params;
     const session = await sessionController.getSessionById(id);
@@ -112,6 +122,7 @@ export const functions = {
     getAllSessions,
     getSessionById,
     getSessionsByDateRange,
+    getAvailableSessions,
     getSessionByPatientId,
     getSessionByTreatmentId,
     getSessionByWorkerId,

@@ -131,6 +131,25 @@ class EMAIL_NOT_FOUND extends Error {
     }
 }
 
+class INVALID_DATE_RANGE extends Error {
+    constructor(){
+        super("Rango de fechas inválido");
+        this.status=400;
+    }
+}
+
+class HISTORY_NOT_FOUND extends Error {
+    constructor(){
+        super("Historial no encontrado");
+        this.status=404;
+    }
+}
+class SLOTS_NOT_FOUND extends Error {
+    constructor(){
+        super("Horarios no encontrados");
+        this.status=404;
+    }
+}
 /* class USERNAME_NOT_FOUND extends Error {
     constructor(){
         super("Nombre de usuario no encontrado");
@@ -147,13 +166,16 @@ class EMAIL_NOT_FOUND extends Error {
 
 export const errors ={
     WORKER_NOT_FOUND,
-    PATIENT_NOT_FOUND,  /*  CLIENT_ALREADY_EXISTS, */
+    HISTORY_NOT_FOUND,
+    PATIENT_NOT_FOUND,
+    SLOTS_NOT_FOUND,
     EMAIL_ALREADY_EXISTS,
     INVALID_CREDENTIALS,
     TREATMENT_NOT_FOUND,
     SESSION_NOT_FOUND,
     INVALID_ID,
     INVALID_EMAIL,
+    INVALID_DATE_RANGE,
     INVALID_DATA,
     INVALID_DATE,
     INCORRECT_STATUS,

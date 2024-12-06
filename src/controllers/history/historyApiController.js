@@ -5,7 +5,10 @@ async function getAllHistory(req, res) {
     res.json(history);
 }
 
+
+
 export const functions = {
-    getAllHistory
+    getAllHistory,
+   
 }
 export default functions

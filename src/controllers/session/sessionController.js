@@ -5,7 +5,8 @@ import workerModel from "../../models/workerModel.js";
 import scheduleModel from "../../models/scheduleModel.js";
 import historyModel from "../../models/historyModel.js";
 import error from "../../helpers/errors.js";
-import { EmptyResultError, Op } from "sequelize";
+import { Op } from "sequelize";
+
 
 const includeOptions = [
     {
@@ -59,7 +60,55 @@ async function getSessionsByDateRange(startDate, endDate) {
     return sessions;        
 }
 
+async function getAvailableSessions(startDate, endDate) {
+    const schedules = await scheduleModel.findAll({
+        attributes: ['schedule_id', 'hours']
+    });
 
+  
+    const createdSessions = await sessionModel.findAll({
+        where: {
+            date: {
+                [Op.between]: [startDate, endDate]
+            }
+        },
+        attributes: ['date', 'schedule_id']
+    });
+
+   
+    const occupiedMap = new Set(
+        createdSessions.map(session => `${session.date}-${session.schedule_id}`)
+    );
+
+    const availableSlots = [];
+    let currentDate = new Date(startDate);
+    const end = new Date(endDate);
+
+   
+    while (currentDate <= end) {
+        const dateString = currentDate.toISOString().split('T')[0]; 
+
+        schedules.forEach(schedule => {
+            const key = `${dateString}-${schedule.schedule_id}`;
+            if (!occupiedMap.has(key)) {
+                availableSlots.push({
+                    date: dateString,
+                    schedule_id: schedule.schedule_id,
+                    hours: schedule.hours
+                });
+            }
+        });
+
+      
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    if (availableSlots.length === 0) {
+        throw new error.SLOTS_NOT_FOUND();
+    }
+
+    return availableSlots;
+}
 
 
 async function getSessionById(session_id) {
@@ -221,6 +270,7 @@ async function deleteSession(session_id) {
 
 export const functions = {
     getAllSessions,
+    getAvailableSessions,
     getSessionById,
     getSessionsByDateRange,
     getSessionByPatientId,

@@ -5,4 +5,6 @@ const router = Router()
 
 router.get("/",historyApiController.getAllHistory)
 
+
+
 export default router
