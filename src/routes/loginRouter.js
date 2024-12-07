@@ -1,13 +1,13 @@
-import { Router } from "express";
-/* import loginViewController from "../controllers/auth/loginViewController.js" */
+/* import { Router } from "express";
+import loginApiController from "../controllers/auth/loginApiController.js"
 
 const router = Router()
 
-/* router.get("/",loginViewController.loginForm)
-
-router.post("/",loginViewController.login)
-
-router.get("/logout",loginViewController.logout); */
 
 
-export default router
+router.post("/",loginApiController.login)
+
+
+
+
+export default router */

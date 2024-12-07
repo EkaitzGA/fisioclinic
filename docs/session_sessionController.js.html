@@ -1,4 +1,32 @@
-import sessionModel from "../../models/sessionModel.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: session/sessionController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: session/sessionController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import sessionModel from "../../models/sessionModel.js";
 import treatmentModel from "../../models/treatmentModel.js";
 import patientModel from "../../models/patientModel.js";
 import workerModel from "../../models/workerModel.js";
@@ -28,7 +56,7 @@ const includeOptions = [
 ];
 /**
  * Gets all sessions ordered by date in descending order and by hours in ascending order.
- * @returns {Promise<Array<Session>>} List of sessions.
+ * @returns {Promise&lt;Array&lt;Session>>} List of sessions.
  * @throws {SESSION_NOT_FOUND} If there are no sessions.
  */
 async function getAllSessions() {
@@ -50,7 +78,7 @@ async function getAllSessions() {
  * Gets all sessions that are in the given date range, ordered by date in ascending order and by hours in ascending order.
  * @param {Date|string} startDate - The start date. Can be a Date object or a string in the format 'yyyy-mm-dd'.
  * @param {Date|string} endDate - The end date. Can be a Date object or a string in the format 'yyyy-mm-dd'.
- * @returns {Promise<Array<Session>>} List of sessions.
+ * @returns {Promise&lt;Array&lt;Session>>} List of sessions.
  * @throws {INVALID_DATE} If the given dates are invalid.
  * @throws {SESSION_NOT_FOUND} If there are no sessions in the given date range.
  */
@@ -79,7 +107,7 @@ async function getSessionsByDateRange(startDate, endDate) {
  * 
  * @param {Date|string} startDate - The start date of the range. Can be a Date object or a string in the format 'yyyy-mm-dd'.
  * @param {Date|string} endDate - The end date of the range. Can be a Date object or a string in the format 'yyyy-mm-dd'.
- * @returns {Promise<Array<Object>>} List of available slots, each containing date, schedule_id, and hours.
+ * @returns {Promise&lt;Array&lt;Object>>} List of available slots, each containing date, schedule_id, and hours.
  * @throws {SLOTS_NOT_FOUND} If no available slots are found within the specified date range.
  */
 async function getAvailableSessions(startDate, endDate) {
@@ -107,7 +135,7 @@ async function getAvailableSessions(startDate, endDate) {
     const end = new Date(endDate);
 
    
-    while (currentDate <= end) {
+    while (currentDate &lt;= end) {
         const dateString = currentDate.toISOString().split('T')[0]; 
 
         schedules.forEach(schedule => {
@@ -136,7 +164,7 @@ async function getAvailableSessions(startDate, endDate) {
     /**
      * Gets a session by its id.
      * @param {number} session_id - The id of the session.
-     * @returns {Promise<Session>} The session.
+     * @returns {Promise&lt;Session>} The session.
      * @throws {SESSION_NOT_FOUND} If the session is not found.
      */
 async function getSessionById(session_id) {
@@ -154,7 +182,7 @@ async function getSessionById(session_id) {
     /**
      * Gets all sessions of a patient ordered by date in descending order and by hours in ascending order.
      * @param {number} patient_id - The id of the patient.
-     * @returns {Promise<Array<Session>>} List of sessions.
+     * @returns {Promise&lt;Array&lt;Session>>} List of sessions.
      * @throws {SESSION_NOT_FOUND} If the patient has no sessions.
      */
 async function getSessionByPatientId(patient_id) {
@@ -176,7 +204,7 @@ async function getSessionByPatientId(patient_id) {
     /**
      * Gets all sessions of a treatment ordered by date in descending order and by hours in ascending order.
      * @param {number} treatment_id - The id of the treatment.
-     * @returns {Promise<Array<Session>>} List of sessions.
+     * @returns {Promise&lt;Array&lt;Session>>} List of sessions.
      * @throws {INVALID_ID} If the treatment_id is null or undefined.
      * @throws {SESSION_NOT_FOUND} If the treatment has no sessions.
      */
@@ -201,7 +229,7 @@ async function getSessionByTreatmentId(treatment_id) {
     /**
      * Gets all sessions of a worker ordered by date in descending order and by hours in ascending order.
      * @param {number} worker_id - The id of the worker.
-     * @returns {Promise<Array<Session>>} List of sessions.
+     * @returns {Promise&lt;Array&lt;Session>>} List of sessions.
      * @throws {INVALID_ID} If the worker_id is null or undefined.
      * @throws {SESSION_NOT_FOUND} If the worker has no sessions.
      */
@@ -227,7 +255,7 @@ async function getSessionByWorkerId(worker_id) {
     /**
      * Gets all sessions with a given status ordered by date in ascending order if the status is 'Pendiente' or descending order if the status is 'Cerrada'.
      * @param {string} status - The status of the sessions. Must be either 'Pendiente' or 'Cerrada'.
-     * @returns {Promise<Array<Session>>} List of sessions.
+     * @returns {Promise&lt;Array&lt;Session>>} List of sessions.
      * @throws {INCORRECT_STATUS} If the status is not 'Pendiente' or 'Cerrada'.
      * @throws {SESSION_NOT_FOUND} If there are no sessions with the given status.
      */
@@ -242,7 +270,7 @@ async function getSessionByStatus(status) {
             [scheduleModel, 'hours', orderDirection]
         ]
     });
-    if(status !== "Pendiente" && status !== "Cerrada"){
+    if(status !== "Pendiente" &amp;&amp; status !== "Cerrada"){
         throw new error.INCORRECT_STATUS()
     }
     if (!session) {
@@ -261,7 +289,7 @@ async function getSessionByStatus(status) {
      * - date: The date of the session.
      * - status: The status of the session. Must be either 'Pendiente' or 'Cerrada'.
      * - reason: The reason of the session. Only required if the status is 'Cerrada'.
-     * @returns {Promise<Session>} The created session with all its relations.
+     * @returns {Promise&lt;Session>} The created session with all its relations.
      * @throws {CREATE_DOESNT_WORK} If the session could not be created.
      */
 async function createSession(sessionData){
@@ -286,7 +314,7 @@ async function createSession(sessionData){
      * @param {Date} date - The date of the session.
      * @param {"Pendiente" | "Cerrada"} status - The status of the session. Must be either 'Pendiente' or 'Cerrada'.
      * @param {String} reason - The reason of the session. Only required if the status is 'Cerrada'.
-     * @returns {Promise<Session>} The updated session with all its relations.
+     * @returns {Promise&lt;Session>} The updated session with all its relations.
      * @throws {SESSION_NOT_FOUND} If the session does not exist.
      * @throws {BLOCK_UPDATE_SESSION} If the session is already closed.
      */
@@ -344,7 +372,7 @@ async function updateSession(session_id, treatment_id, patient_id, schedule_id, 
 /**
  * Deletes a session by its ID.
  * @param {number} session_id The ID of the session to delete.
- * @returns {Promise<Object>} The deleted session.
+ * @returns {Promise&lt;Object>} The deleted session.
  * @throws {error.SESSION_NOT_FOUND} If no session with the given ID exists.
  */
 async function deleteSession(session_id) {
@@ -370,4 +398,26 @@ export const functions = {
     deleteSession
 }
 
-export default functions
+export default functions</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#createPatient">createPatient</a></li><li><a href="global.html#createSession">createSession</a></li><li><a href="global.html#createTreatment">createTreatment</a></li><li><a href="global.html#createWorker">createWorker</a></li><li><a href="global.html#deletePatient">deletePatient</a></li><li><a href="global.html#deleteSession">deleteSession</a></li><li><a href="global.html#deleteTreatment">deleteTreatment</a></li><li><a href="global.html#deleteWorker">deleteWorker</a></li><li><a href="global.html#getAllSchedules">getAllSchedules</a></li><li><a href="global.html#getAllSessions">getAllSessions</a></li><li><a href="global.html#getAllTreatments">getAllTreatments</a></li><li><a href="global.html#getAllWorkers">getAllWorkers</a></li><li><a href="global.html#getAvailableSessions">getAvailableSessions</a></li><li><a href="global.html#getPatientByEmail">getPatientByEmail</a></li><li><a href="global.html#getPatientById">getPatientById</a></li><li><a href="global.html#getSessionById">getSessionById</a></li><li><a href="global.html#getSessionByPatientId">getSessionByPatientId</a></li><li><a href="global.html#getSessionByStatus">getSessionByStatus</a></li><li><a href="global.html#getSessionByTreatmentId">getSessionByTreatmentId</a></li><li><a href="global.html#getSessionByWorkerId">getSessionByWorkerId</a></li><li><a href="global.html#getSessionsByDateRange">getSessionsByDateRange</a></li><li><a href="global.html#getWorkerByEmail">getWorkerByEmail</a></li><li><a href="global.html#getWorkerById">getWorkerById</a></li><li><a href="global.html#updatePatient">updatePatient</a></li><li><a href="global.html#updateSession">updateSession</a></li><li><a href="global.html#updateTreatment">updateTreatment</a></li><li><a href="global.html#updateWorker">updateWorker</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Dec 07 2024 18:58:17 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

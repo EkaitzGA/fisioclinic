@@ -2,6 +2,7 @@ import historyModel from "../../models/historyModel.js";
 import error from "../../helpers/errors.js";
 
 
+
 async function getAllHistory() {
     const history = await historyModel
     .find()

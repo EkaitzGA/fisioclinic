@@ -1,4 +1,32 @@
-import patientModel from "../../models/patientModel.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: patient/patientController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: patient/patientController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import patientModel from "../../models/patientModel.js";
 import error from "../../helpers/errors.js";
 
 
@@ -14,7 +42,7 @@ async function getAllPatients() {
     /**
      * Searches for a patient with the given email and returns it.
      * @param {string} email - The email to search for.
-     * @returns {Promise<Object>} The searched patient.
+     * @returns {Promise&lt;Object>} The searched patient.
      * @throws {error.PATIENT_NOT_FOUND} If the patient is not found.
      */
 async function getPatientByEmail(email) {
@@ -32,7 +60,7 @@ async function getPatientByEmail(email) {
     /**
      * Searches for a patient with the given ID and returns it.
      * @param {number} patient_id - The ID to search for.
-     * @returns {Promise<Object>} The searched patient.
+     * @returns {Promise&lt;Object>} The searched patient.
      * @throws {error.PATIENT_NOT_FOUND} If the patient is not found.
      */
 async function getPatientById(patient_id) {
@@ -54,7 +82,7 @@ async function getPatientById(patient_id) {
      * @param {string} patientData.phone - The phone of the patient.
      * @param {string} patientData.email - The email of the patient.
      * @param {string} patientData.medical_history - The medical history of the patient.
-     * @returns {Promise<Object>} The created patient.
+     * @returns {Promise&lt;Object>} The created patient.
      * @throws {error.CREATE_DOESNT_WORK} If the creation fails.
      */
 async function createPatient(patientData) {
@@ -73,7 +101,7 @@ async function createPatient(patientData) {
      * @param {string} phone - The new phone of the patient.
      * @param {string} email - The new email of the patient.
      * @param {string} medical_history - The new medical history of the patient.
-     * @returns {Promise<Object>} The updated patient.
+     * @returns {Promise&lt;Object>} The updated patient.
      * @throws {error.PATIENT_NOT_FOUND} If the patient is not found.
      */
 async function updatePatient(patient_id, first_name, last_name, phone, email,medical_history) {
@@ -93,7 +121,7 @@ async function updatePatient(patient_id, first_name, last_name, phone, email,med
     /**
      * Deletes a patient from the database.
      * @param {number} patient_id - The ID of the patient to delete.
-     * @returns {Promise<Object>} The deleted patient.
+     * @returns {Promise&lt;Object>} The deleted patient.
      * @throws {error.PATIENT_NOT_FOUND} If the patient is not found.
      */
 async function deletePatient(patient_id) {
@@ -112,4 +140,26 @@ export const functions = {
   updatePatient,
   deletePatient
 }
-export default functions
+export default functions</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#createPatient">createPatient</a></li><li><a href="global.html#createSession">createSession</a></li><li><a href="global.html#createTreatment">createTreatment</a></li><li><a href="global.html#createWorker">createWorker</a></li><li><a href="global.html#deletePatient">deletePatient</a></li><li><a href="global.html#deleteSession">deleteSession</a></li><li><a href="global.html#deleteTreatment">deleteTreatment</a></li><li><a href="global.html#deleteWorker">deleteWorker</a></li><li><a href="global.html#getAllSchedules">getAllSchedules</a></li><li><a href="global.html#getAllSessions">getAllSessions</a></li><li><a href="global.html#getAllTreatments">getAllTreatments</a></li><li><a href="global.html#getAllWorkers">getAllWorkers</a></li><li><a href="global.html#getAvailableSessions">getAvailableSessions</a></li><li><a href="global.html#getPatientByEmail">getPatientByEmail</a></li><li><a href="global.html#getPatientById">getPatientById</a></li><li><a href="global.html#getSessionById">getSessionById</a></li><li><a href="global.html#getSessionByPatientId">getSessionByPatientId</a></li><li><a href="global.html#getSessionByStatus">getSessionByStatus</a></li><li><a href="global.html#getSessionByTreatmentId">getSessionByTreatmentId</a></li><li><a href="global.html#getSessionByWorkerId">getSessionByWorkerId</a></li><li><a href="global.html#getSessionsByDateRange">getSessionsByDateRange</a></li><li><a href="global.html#getWorkerByEmail">getWorkerByEmail</a></li><li><a href="global.html#getWorkerById">getWorkerById</a></li><li><a href="global.html#updatePatient">updatePatient</a></li><li><a href="global.html#updateSession">updateSession</a></li><li><a href="global.html#updateTreatment">updateTreatment</a></li><li><a href="global.html#updateWorker">updateWorker</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Dec 07 2024 18:58:17 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

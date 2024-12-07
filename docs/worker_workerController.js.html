@@ -1,10 +1,38 @@
-import workerModel from "../../models/workerModel.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: worker/workerController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: worker/workerController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import workerModel from "../../models/workerModel.js";
 import error from "../../helpers/errors.js";
 
 /**
  * Searches for a worker with the given email and returns it.
  * @param {string} email - The email to search for.
- * @returns {Promise<Object>} The searched worker.
+ * @returns {Promise&lt;Object>} The searched worker.
  * @throws {error.INVALID_EMAIL} If the given email is invalid.
  * @throws {error.WORKER_NOT_FOUND} If the worker is not found.
  */
@@ -26,7 +54,7 @@ async function getWorkerByEmail(email) {
 /**
  * Searches for a worker with the given ID and returns it.
  * @param {number} worker_id - The ID to search for.
- * @returns {Promise<Object>} The searched worker.
+ * @returns {Promise&lt;Object>} The searched worker.
  * @throws {error.INVALID_ID} If the given ID is invalid.
  * @throws {error.WORKER_NOT_FOUND} If the worker is not found.
  */
@@ -43,7 +71,7 @@ async function getWorkerById(worker_id) {
 
 /**
  * Searches for all workers and returns them.
- * @returns {Promise<Object[]>} An array with all the workers.
+ * @returns {Promise&lt;Object[]>} An array with all the workers.
  * @throws {error.FINDALL_EMPTY} If no workers are found.
  */
 async function getAllWorkers() {
@@ -63,7 +91,7 @@ async function getAllWorkers() {
  * @param {string} workerData.email - The email of the worker.
  * @param {string} workerData.password - The password of the worker.
  * @param {string} [workerData.phone] - The phone number of the worker (optional).
- * @returns {Promise<Object>} The newly created worker.
+ * @returns {Promise&lt;Object>} The newly created worker.
  * @throws {error.INVALID_DATA} If the worker data is invalid.
  */
 async function createWorker(workerData) {
@@ -82,7 +110,7 @@ async function createWorker(workerData) {
  * @param {string} email - The new email of the worker.
  * @param {string} password - The new password of the worker.
  * @param {string} [phone] - The new phone number of the worker (optional).
- * @returns {Promise<Object>} The updated worker.
+ * @returns {Promise&lt;Object>} The updated worker.
  * @throws {error.WORKER_NOT_FOUND} If the worker is not found.
  */
 async function updateWorker(worker_id, first_name, last_name, email, password, phone) {
@@ -102,7 +130,7 @@ async function updateWorker(worker_id, first_name, last_name, email, password, p
 /**
  * Deletes a worker from the database by their ID.
  * @param {number} worker_id - The ID of the worker to delete.
- * @returns {Promise<Object>} The deleted worker.
+ * @returns {Promise&lt;Object>} The deleted worker.
  * @throws {error.INVALID_ID} If the worker_id is null or undefined.
  * @throws {error.WORKER_NOT_FOUND} If the worker is not found.
  */
@@ -125,4 +153,26 @@ export const functions = {
     updateWorker,
     deleteWorker    
 }
-export default functions
+export default functions</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#createPatient">createPatient</a></li><li><a href="global.html#createSession">createSession</a></li><li><a href="global.html#createTreatment">createTreatment</a></li><li><a href="global.html#createWorker">createWorker</a></li><li><a href="global.html#deletePatient">deletePatient</a></li><li><a href="global.html#deleteSession">deleteSession</a></li><li><a href="global.html#deleteTreatment">deleteTreatment</a></li><li><a href="global.html#deleteWorker">deleteWorker</a></li><li><a href="global.html#getAllSchedules">getAllSchedules</a></li><li><a href="global.html#getAllSessions">getAllSessions</a></li><li><a href="global.html#getAllTreatments">getAllTreatments</a></li><li><a href="global.html#getAllWorkers">getAllWorkers</a></li><li><a href="global.html#getAvailableSessions">getAvailableSessions</a></li><li><a href="global.html#getPatientByEmail">getPatientByEmail</a></li><li><a href="global.html#getPatientById">getPatientById</a></li><li><a href="global.html#getSessionById">getSessionById</a></li><li><a href="global.html#getSessionByPatientId">getSessionByPatientId</a></li><li><a href="global.html#getSessionByStatus">getSessionByStatus</a></li><li><a href="global.html#getSessionByTreatmentId">getSessionByTreatmentId</a></li><li><a href="global.html#getSessionByWorkerId">getSessionByWorkerId</a></li><li><a href="global.html#getSessionsByDateRange">getSessionsByDateRange</a></li><li><a href="global.html#getWorkerByEmail">getWorkerByEmail</a></li><li><a href="global.html#getWorkerById">getWorkerById</a></li><li><a href="global.html#updatePatient">updatePatient</a></li><li><a href="global.html#updateSession">updateSession</a></li><li><a href="global.html#updateTreatment">updateTreatment</a></li><li><a href="global.html#updateWorker">updateWorker</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Dec 07 2024 18:58:17 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

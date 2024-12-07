@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+/* import bcrypt from "bcryptjs";
 
 
 async function hashPassword(password){
@@ -14,4 +14,4 @@ async function verifyPassword(password,hash){
 export {
     hashPassword,
     verifyPassword
-}
+} */

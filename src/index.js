@@ -3,10 +3,13 @@ import router from './routes/router.js';// importar rutas
 import session from "express-session";
 import dotenv from 'dotenv'; 
 import db from './config/mongoose.js';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();// crear servidor 
+
+app.use(cors())
 
 app.use(session({
     secret: process.env.SESSION_SECRET,

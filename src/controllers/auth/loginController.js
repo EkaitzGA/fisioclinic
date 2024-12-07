@@ -1,9 +1,10 @@
 /* import error from "../../helpers/errors.js";
 import { verifyPassword } from "../../config/bcrypt.js";
-import adminController from "../admin/adminController.js";
+import workerController from "../worker/workerController.js";
+
 
 async function login(email,password){
-   let worker = await adminController.getWorkerByEmail(email);
+   let worker = await workerController.getWorkerByEmail(email);
         if (!worker) {
             throw new error.EMAIL_NOT_FOUND();
         }
@@ -14,8 +15,6 @@ async function login(email,password){
     } 
     return worker;
 }
-
-
 export const functions ={
     login
 }
