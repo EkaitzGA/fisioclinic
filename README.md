@@ -65,8 +65,7 @@ Para ejecutar este proyecto, necesitas:
 
 1. Clona el repositorio:
    ```bash
-   git clone git@github.com:EkaitzGA/Machimba.git
-   cd Machimba
+   git clone git@github.com:EkaitzGA/fisioclinic.git
    ```
 
 2. Instala las dependencias:
