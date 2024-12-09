@@ -82,34 +82,6 @@ class INVALID_CREDENTIALS extends Error{
     }
 }
 
-/* class PASSWORDS_DONT_MATCH extends Error{
-    constructor(){
-        super("Las contraseñas no coinciden");
-        this.status=400;
-    }
-} */
-
-/* class ORDER_ALREADY_OPEN extends Error{
-    constructor(){
-        super("Ya existe un pedido abierto");
-        this.status = 409;
-    }
-} */
-
-/* class ORDER_DOESNT_EXIST extends Error {
-    constructor(){
-        super("No existe un pedido abierto");
-        this.status = 404;
-    }
-} */
-
-/* class PURSE_NOT_FOUND extends Error {
-    constructor(){
-        super("Bolso no encontrado");
-        this.status=404;
-    }
-} */
-
 class CREATE_DOESNT_WORK extends Error {
     constructor(){
         super("No se ha podido crear");
@@ -150,19 +122,7 @@ class SLOTS_NOT_FOUND extends Error {
         this.status=404;
     }
 }
-/* class USERNAME_NOT_FOUND extends Error {
-    constructor(){
-        super("Nombre de usuario no encontrado");
-        this.status=404;
-    }
-}
- */
-/* class PURCHASE_NOT_FOUND extends Error {
-    constructor(){
-        super("Usuario no encontrado");
-        this.status=404;
-    }
-} */
+
 
 export const errors ={
     WORKER_NOT_FOUND,
@@ -180,15 +140,10 @@ export const errors ={
     INVALID_DATE,
     INCORRECT_STATUS,
     BLOCK_UPDATE_SESSION,
-    /* PASSWORDS_DONT_MATCH,
-    ORDER_ALREADY_OPEN,
-    ORDER_DOESNT_EXIST,
-    PURSE_NOT_FOUND, */
     FINDALL_EMPTY,
     CREATE_DOESNT_WORK,
     EMAIL_NOT_FOUND,
-   /*  USERNAME_NOT_FOUND,
-    PURCHASE_NOT_FOUND */
+
 }
 
 export default errors;
